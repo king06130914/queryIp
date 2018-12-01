@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ip地址查询</title>
+    <link rel="stylesheet" href="./static/css/bootstrap.min.css"/>
+    <script src="./static/js/jquery.min.js"></script>
+    <script src="./static/js/base.js"></script>
+    <style>
+        .container {
+            width: 300px;
+        }
+        #ipInfo {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <label for="">请输入ip地址</label>
+            <div class="input-group">
+                <input type="text" id="ipText" class="form-control" required/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" id="subIp">查询</button>
+                </span>
+            </div>
+        </div>
+        <table class="table" id="ipInfo">
+            <tr>
+                <td>ip</td>
+                <td id="ipNumber"></td>
+            </tr>
+            <tr>
+                <td>国家</td>
+                <td id="ipCountry"></td>
+            </tr>
+            <tr>
+                <td>省份</td>
+                <td id="ipProvince"></td>
+            </tr>
+            <tr>
+                <td>城市</td>
+                <td id="ipCity"></td>
+            </tr>
+            <tr>
+                <td>运营商</td>
+                <td id="ipCatName"></td>
+            </tr>
+            <tr>
+                <td>其他</td>
+                <td id="ipMsg"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        $('#subIp').click(function(){
+            var ip = $('#ipText').val();
+            IMOOC.GLOBAL.ajax('/queryIp/query', 'post', {ip: ip}, 'json', IMOOC.APPS.QUERYIP.dataCallback);
+        });
+    });
+</script>
+</html>
